@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Browse-Amp 登录导入",
+  "version": "0.1.0",
+  "description": "经明确授权，将当前网站的可迁移登录状态加密发送到自己的 Browse-Amp 会话。",
+  "permissions": ["activeTab", "scripting", "cookies"],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "action": { "default_popup": "popup.html" }
+}

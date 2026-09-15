@@ -1,0 +1,21 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
+  "files": {
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.css",
+      "**/*.js",
+      "**/*.json",
+      "!pnpm-lock.yaml",
+      "!node_modules",
+      "!.amp",
+      "!.data",
+      "!state",
+      "!dist"
+    ]
+  },
+  "formatter": { "indentStyle": "space" },
+  "linter": { "enabled": true, "rules": { "recommended": true } },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+}
