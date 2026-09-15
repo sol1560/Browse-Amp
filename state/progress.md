@@ -1,7 +1,7 @@
 # Mission Progress
 
 Status: BLOCKED
-Current: AGPL-3.0-only 发布准备完成；用户已授权发布，但 GitHub 连接无法创建仓库，等待连接权限与外部设备
+Current: AGPL-3.0-only 源码已发布到 sol1560/Browse-Amp，三系统 Actions 通过；完整跨平台开发仍未完成
 
 | 功能 | 状态 | 证据 |
 | --- | --- | --- |

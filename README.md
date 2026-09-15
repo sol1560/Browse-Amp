@@ -1,6 +1,6 @@
 # Browse-Amp
 
-可自部署的多 Agent 浏览器与 Linux X11 桌面控制原型。独立编写，没有复制 Ego Lite 闭源浏览器。**不是全平台成品，也未完成公开发布。**
+可自部署的多 Agent 浏览器与 Linux X11 桌面控制原型。独立编写，没有复制 Ego Lite 闭源浏览器。源码已公开于 [sol1560/Browse-Amp](https://github.com/sol1560/Browse-Amp)，**不是全平台成品**。
 
 ## 已能运行
 
@@ -12,7 +12,7 @@
 
 ## 本地启动
 
-需要 Node.js 24+、pnpm 12、Chromium 所需系统库。在 Linux 上验证过；其他系统尚未运行检查。
+需要 Node.js 24+、pnpm 12、Chromium 所需系统库。GitHub Actions 已通过 Ubuntu 24.04、macOS 15、Windows 2025 的浏览器检查，以及 Linux X11 独立测试；不代表 macOS/Windows 整机控制已实现。
 
 ```sh
 pnpm install --frozen-lockfile
@@ -62,7 +62,7 @@ pnpm test
 
 Linux 整机测试需要**专用可丢弃的** 1280×800 Xvfb 与前台 xterm，设置 `BROWSE_TEST_DISPLAY` 后运行 `tests/linux.test.ts`。不要把这个测试指向日常桌面，它会输入终端命令。
 
-`.github/workflows/check.yml` 只检查本项目：三种系统上的 Chromium，以及 Linux X11；尚未在 GitHub 运行。不提供通用远程电脑、隧道或无限模拟器。公共标准运行器免分钟费不代表无限资源；有时长、并发和用途限制。
+`.github/workflows/check.yml` 只检查本项目：三种系统上的 Chromium，以及 Linux X11；[首次远程检查全部通过](https://github.com/sol1560/Browse-Amp/actions/runs/34941716103)。每个系统的常规测试有 13 项通过、2 项条件跳过；Linux 随后单独通过 X11 测试。触控界面测试仍只在本地执行。不提供通用远程电脑、隧道或无限模拟器。公共标准运行器免分钟费不代表无限资源；有时长、并发和用途限制。
 
 E2B、macOS/Windows 原生桌面、Android、iOS/iPadOS、visionOS、watchOS **未完成接入与实测**。Linux 桌面缺少元素树、拖动和实时视频。服务为单进程 PGlite，不支持多实例部署；未做性能排名，不能宣称 SOTA。详细状态见 [平台表](docs/platform-support.md)。
 

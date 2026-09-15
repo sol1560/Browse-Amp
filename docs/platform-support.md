@@ -1,6 +1,6 @@
 # 平台支持与实际证据
 
-截至 2026-09-15，测试环境为 Linux x64 orb、Node 26.5.1、Playwright 1.63.0。未执行任何远程 GitHub Actions 或付费 E2B 请求。
+截至 2026-09-15，本地测试环境为 Linux x64 orb、Node 26.5.1、Playwright 1.63.0。GitHub Actions 使用 Node 24，在 Ubuntu 24.04、macOS 15、Windows 2025 完成浏览器检查，Linux 另通过 X11 测试。未执行付费 E2B 请求。
 
 | 目标 | 实现与实测状态 | 仍缺少 |
 | --- | --- | --- |
@@ -11,7 +11,7 @@
 | Android | orb 无 KVM，没有启动模拟器 | 支持硬件加速的主机或真机、驱动与测试 app |
 | iOS / iPadOS | 无 Mac / Xcode / Simulator | 对应 runtime、XCTest 输入与测试 app |
 | visionOS / watchOS | 无对应 runtime 或设备 | 单独证明输入能力，不假定普通 iOS 驱动可用 |
-| GitHub Actions | 本地提供仓库检查文件；未运行 | GitHub 仓库和明确推送/运行授权；不把 Chromium 检查算原生桌面支持 |
+| GitHub Actions | [三系统任务通过](https://github.com/sol1560/Browse-Amp/actions/runs/34941716103)；各13项通过、2项跳过，Linux另通过1项X11测试 | 远程触控、Apple/Android原生测试；不把 Chromium 检查算原生桌面支持 |
 
 多 Agent 指隔离会话和可交接输入权，不是多个 Agent 同时操纵同一鼠标。整机操作会影响该 X11 用户能访问的文件和应用，应使用专用账户或隔离环境。
 
