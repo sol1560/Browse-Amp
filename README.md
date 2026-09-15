@@ -62,7 +62,9 @@ pnpm test
 
 Linux 整机测试需要**专用可丢弃的** 1280×800 Xvfb 与前台 xterm，设置 `BROWSE_TEST_DISPLAY` 后运行 `tests/linux.test.ts`。不要把这个测试指向日常桌面，它会输入终端命令。
 
-`.github/workflows/check.yml` 只检查本项目：三种系统上的 Chromium，以及 Linux X11；[首次远程检查全部通过](https://github.com/sol1560/Browse-Amp/actions/runs/34941716103)。每个系统的常规测试有 13 项通过、2 项条件跳过；Linux 随后单独通过 X11 测试。触控界面测试仍只在本地执行。不提供通用远程电脑、隧道或无限模拟器。公共标准运行器免分钟费不代表无限资源；有时长、并发和用途限制。
+`.github/workflows/check.yml` 只检查本项目：三种系统上的 Chromium，以及 Linux X11；[修正 Windows 执行方式后，远程检查全部通过](https://github.com/sol1560/Browse-Amp/actions/runs/34942655549)。每个系统的常规测试有 13 项通过、2 项条件跳过；Linux 随后单独通过 X11 测试。触控界面测试仍只在本地执行。不提供通用远程电脑、隧道或无限模拟器。公共标准运行器免分钟费不代表无限资源；有时长、并发和用途限制。
+
+已知问题：API 截图测试曾在本地与 Linux Actions 偶发失败，后续运行通过但根因尚未确定；测试已保留原始错误用于后续定位。最初 Windows 任务缺少测试输出，不能作为通过证据，以上链接指向修正后的实际测试记录。
 
 E2B、macOS/Windows 原生桌面、Android、iOS/iPadOS、visionOS、watchOS **未完成接入与实测**。Linux 桌面缺少元素树、拖动和实时视频。服务为单进程 PGlite，不支持多实例部署；未做性能排名，不能宣称 SOTA。详细状态见 [平台表](docs/platform-support.md)。
 
