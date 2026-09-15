@@ -27,10 +27,10 @@ jobs:
       - run: npm install --global pnpm@12.0.0
       # The Node entry point waits for pnpm's native binary on Windows too.
       - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" install --frozen-lockfile
-      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" exec playwright install --with-deps chromium
-      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" lint
-      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" build
-      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" test
+      - run: node node_modules/playwright/cli.js install --with-deps chromium
+      - run: node node_modules/@biomejs/biome/bin/biome check .
+      - run: node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --config apps/console/vite.config.ts
+      - run: node --import tsx --test --test-concurrency=1 tests/*.test.ts
       - if: runner.os == 'Linux'
         run: |
           sudo apt-get update

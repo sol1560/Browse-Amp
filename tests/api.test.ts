@@ -12,6 +12,10 @@ test("API authenticates every device operation and does not leak validation inpu
   const token = "a".repeat(64);
   const credentials = [{ token, user: "alice", actor: "human", human: true }];
   const { app } = await createApp(store, credentials, new Set());
+  let lastError: Error | undefined;
+  app.addHook("onError", async (_request, _reply, error) => {
+    lastError = error;
+  });
   const headers = { authorization: `Bearer ${token}` };
   try {
     assert.equal((await app.inject("/api/sessions")).statusCode, 401);
@@ -51,15 +55,16 @@ test("API authenticates every device operation and does not leak validation inpu
     assert.equal(a.statusCode, 200);
     const session = a.json();
     assert.equal(session.status, "ready");
+    const screenshot = await app.inject({
+      url: `/api/sessions/${session.id}/screenshot`,
+      headers,
+    });
     assert.equal(
-      (
-        await app.inject({
-          url: `/api/sessions/${session.id}/screenshot`,
-          headers,
-        })
-      ).headers["content-type"],
-      "image/jpeg",
+      screenshot.statusCode,
+      200,
+      lastError?.stack || screenshot.body,
     );
+    assert.equal(screenshot.headers["content-type"], "image/jpeg");
     await app.inject({
       url: `/api/sessions/${session.id}`,
       method: "DELETE",
