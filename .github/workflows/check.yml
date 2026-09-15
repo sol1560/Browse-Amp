@@ -16,17 +16,21 @@ jobs:
         os: [ubuntu-24.04, macos-15, windows-2025]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - run: npm install --global pnpm@12.0.0
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm lint
-      - run: pnpm build
-      - run: pnpm test
+      # The Node entry point waits for pnpm's native binary on Windows too.
+      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" install --frozen-lockfile
+      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" exec playwright install --with-deps chromium
+      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" lint
+      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" build
+      - run: node "$(npm root -g)/pnpm/bin/pnpm.mjs" test
       - if: runner.os == 'Linux'
         run: |
           sudo apt-get update
